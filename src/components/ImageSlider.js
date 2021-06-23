@@ -1,49 +1,79 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import {Data} from './Data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { connect } from 'react-redux';
 //import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icon'
 
 
-const ImageSlider = ({slides}) => {
-    const [curr, setCurr] = useState(0)
-    const len = slides.length;
+class ImageSlider extends Component {
 
-    const nextSlide = () => {
-        setCurr(curr === len - 1 ? 0 : curr + 1);
-      };
+  // constructor (props) {
+  //   super(props)
+  //   this.state ={
+  //      curr:0,
+  //    }
+  // }
+
+  
+  // nextSlide = () => {
+  //   let len = this.props.slides.length;
+  //   const {curr} = this.state
+
+  //   this.setState({curr:curr === 0 ? 0 : curr + 1})
     
-      const prevSlide = () => {
-        setCurr(curr === 0 ? len- 1 : curr - 1);
-      };
+  // };
+  
+  // prevSlide = () => {
+  //   let len = this.props.slides.length;
+  //     const {curr} = this.state
+  //       // setCurr(curr === 0 ? len- 1 : curr - 1);
+  //       this.setState({curr:curr === 0 ? len- 1 : curr - 1})
+  //     };
 
-    if (!Array.isArray(slides) || slides.length <= 0) {
-        return null;
-      }
+  render() {
+console.log(this.props ,'THIS>PROPS ')
 
+    // const {curr} = this.state
+    const {curr} = this.props
+    let len = Data.length
     return (
 
-        <section className="slider">
-            {/* {curr===0? 'right' : 'left'} */}
-            <div className= "show">
-            <button className="left" onClick={prevSlide}>⬅️</button>
-                        <button className="right" onClick={nextSlide}>➡️</button>
-            </div>
-                        
-            {Data.map((s, idx)=>{
-                return(
-                    <div
-                    className={idx === curr ? 'slide active' : 'slide'}
-                    key={idx}
-                  >
-                    {idx === curr && (
-                      <img src={s.image} alt='travel image' className='image' />
-                    )}
-                  </div>
-                )
-            })}
-        </section>
-    )
+      <section className="slider">
+          <div className= "show">
+          <button className="left" onClick={()=>this.props.slideLeft(len)}>⬅️</button>
+          <button className="right" onClick={()=>this.props.slideRight(len)}>➡️</button>
+          </div>
+          {Data.map((s, idx)=>{
+              return(
+                  <div
+                  className={idx === curr ? 'slide active' : 'slide'}
+                  key={idx}
+                >
+                  {idx === curr && (
+                    <img src={s.image} alt='travel image' className='image' />
+                  )}
+                </div>
+              )
+          })}
+      </section>
+  )
+  }
 }
-console.log(typeof(Data))
+const mapStateToProps = (state) => {
+  console.log(state ,'state');
+  return {
+    curr: state.slideControl.curr,
+  }
+}
 
-export default ImageSlider
+const mapDispatchToProps = (dispatch) => {
+return {
+  slideRight:(len)=>dispatch({type: 'SLIDE_RIGHT', payload:{totalImages:len}}),
+  slideLeft:(len)=>dispatch({type: 'SLIDE_LEFT', payload:{totalImages:len}}),
+
+}
+} 
+export default connect(mapStateToProps, mapDispatchToProps)(ImageSlider)
+
+
+
