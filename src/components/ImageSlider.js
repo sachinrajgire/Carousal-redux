@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {Data} from './Data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux';
+import { SLIDE_RIGHT } from '../Redux/ActionTypes/actiontypes';
+import {slideRight, fetchPosts,setLoadingToTrue,setLoadingToFalse} from '../Redux/Actions/actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 //import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icon'
 
 
@@ -29,15 +33,20 @@ class ImageSlider extends Component {
   //       // setCurr(curr === 0 ? len- 1 : curr - 1);
   //       this.setState({curr:curr === 0 ? len- 1 : curr - 1})
   //     };
+componentDidMount () {
+    // this.props.setLoadingToTrue()
+    this.props.fetchPosts()
+}
 
   render() {
-console.log(this.props ,'THIS>PROPS ')
 
-    // const {curr} = this.state
-    const {curr} = this.props
+    const {curr ,isLoading,posts} = this.props
+    if(isLoading) {
+      return <CircularProgress />
+    }
     let len = Data.length
     return (
-
+<div>
       <section className="slider">
           <div className= "show">
           <button className="left" onClick={()=>this.props.slideLeft(len)}>⬅️</button>
@@ -55,7 +64,18 @@ console.log(this.props ,'THIS>PROPS ')
                 </div>
               )
           })}
+          
       </section>
+      <div>
+      {posts.map(i=>{
+            return (
+              <ul>
+                <li>{i.title}</li>
+              </ul>
+            )
+          })}
+      </div>
+      </div>  
   )
   }
 }
@@ -63,13 +83,18 @@ const mapStateToProps = (state) => {
   console.log(state ,'state');
   return {
     curr: state.slideControl.curr,
+    isLoading: state.slideControl.isLoading,
+    posts: state.slideControl.posts,
+    
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
 return {
-  slideRight:(len)=>dispatch({type: 'SLIDE_RIGHT', payload:{totalImages:len}}),
+  slideRight:(len)=>dispatch(slideRight(len)),
   slideLeft:(len)=>dispatch({type: 'SLIDE_LEFT', payload:{totalImages:len}}),
+  fetchPosts:()=>dispatch(fetchPosts()),
+  setLoadingToTrue:()=>dispatch(setLoadingToTrue()),
 
 }
 } 

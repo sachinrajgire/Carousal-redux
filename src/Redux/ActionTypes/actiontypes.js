@@ -1,2 +1,5 @@
 export const SLIDE_RIGHT = "SLIDE_RIGHT";
 export const SLIDE_LEFT = "SLIDE_LEFT";
+export const UPDATE_DATA = "UPDATE_DATA";
+export const SET_LOADING_TRUE = "SET_LOADING_TRUE";
+export const SET_LOADING_FALSE = "SET_LOADING_FALSE";
