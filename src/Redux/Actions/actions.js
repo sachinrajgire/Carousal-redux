@@ -15,18 +15,44 @@ export const setLoadingToFalse = () =>{
   return ({ type: SET_LOADING_FALSE})
 } 
 
-export const fetchPosts = () => async dispatch => {
-  try {
-    dispatch(setLoadingToTrue())
-    const url = `https://jsonplaceholder.typicode.com/posts`;
-    const response = await fetch(url)
-    const responseBody = await response.json();
-    console.log(responseBody,'responseBody');
-    dispatch(updateData(responseBody))
-    dispatch(setLoadingToFalse())
+// export const fetchPosts = () => async dispatch => {
+//   try {
+//     dispatch(setLoadingToTrue())
+//     const url = `https://jsonplaceholder.typicode.com/posts`;
+//     const response = await fetch(url)
+//     const responseBody = await response.json();
+//     console.log(responseBody,'responseBody');
+//     dispatch(updateData(responseBody))
+//     dispatch(setLoadingToFalse())
     
-  } catch (error) {
-    dispatch(setLoadingToFalse())
-    console.error(error);
+//   } catch (error) {
+//     dispatch(setLoadingToFalse())
+//     console.error(error);
+//   }
+// }
+
+function fetchPosts() {
+
+  return async function(dispatch,getState){
+    console.log(getState(),'getstate');
+    try {
+      dispatch(setLoadingToTrue())
+      const url = `https://jsonplaceholder.typicode.com/posts`;
+      const response = await fetch(url)
+      const responseBody = await response.json();
+      console.log(responseBody,'responseBody');
+      dispatch(updateData(responseBody))
+      dispatch(setLoadingToFalse())
+      
+    } catch (error) {
+      dispatch(setLoadingToFalse())
+      console.error(error);
+    }
   }
-}
+
+} 
+
+export { fetchPosts}
+
+
+

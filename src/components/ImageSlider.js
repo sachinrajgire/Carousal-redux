@@ -34,7 +34,6 @@ class ImageSlider extends Component {
   //       this.setState({curr:curr === 0 ? len- 1 : curr - 1})
   //     };
 componentDidMount () {
-    // this.props.setLoadingToTrue()
     this.props.fetchPosts()
 }
 
@@ -67,13 +66,7 @@ componentDidMount () {
           
       </section>
       <div>
-      {posts.map(i=>{
-            return (
-              <ul>
-                <li>{i.title}</li>
-              </ul>
-            )
-          })}
+      
       </div>
       </div>  
   )
