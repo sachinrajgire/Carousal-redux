@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent, Component } from 'react';
 import {Data} from './Data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { connect } from 'react-redux';
@@ -37,6 +37,7 @@ componentDidMount () {
     this.props.fetchPosts()
 }
 
+
   render() {
 
     const {curr ,isLoading,posts} = this.props
@@ -48,8 +49,7 @@ componentDidMount () {
 <div>
       <section className="slider">
           <div className= "show">
-          <button className="left" onClick={()=>this.props.slideLeft(len)}>⬅️</button>
-          <button className="right" onClick={()=>this.props.slideRight(len)}>➡️</button>
+          <button className="left" onClick={()=>this.props.slideLeft(len)}>⬅️</button><button className="right" onClick={()=>this.props.slideRight(len)}>➡️</button>
           </div>
           {Data.map((s, idx)=>{
               return(

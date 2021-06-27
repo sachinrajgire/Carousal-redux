@@ -3,3 +3,14 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+
+
+
+// React Library Size :
+
+// Netflix --
+// Hybrid
+
+// On page load -- We are gonna HTML PAGE 
+
+// Subsequenct done thru react 
