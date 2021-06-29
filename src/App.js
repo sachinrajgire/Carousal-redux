@@ -4,7 +4,9 @@ import {Data} from './components/Data';
 import DataDance from './components/DataDance';
 import { useState, useEffect } from 'react';
 import useCallApi from './CustomHooks/useCallApi';
-import Appy from './Appy'
+// import Appy from './Appy'
+import Refy from './Refy'
+import Pagination from './Pagination'
 function App() {
 // const [todo, setTodo] = useState({})
 // const [data,error,loading] = useCallApi('https://jsonplaceholder.typicode.com/todos/1')
@@ -27,10 +29,13 @@ function App() {
 
        {/* <DataDance /> */}
        
-       <Appy 
+       {/* <Appy 
        isValid={true}
        existingCustomer={true}
-       />
+       /> */}
+ 
+      <Pagination />
+
     </div>
   );
 }
