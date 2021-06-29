@@ -8,7 +8,6 @@ const initialState = {
 
 
 export default function(state = initialState, action) {
-  console.log(action,'action')
 
   switch (action.type) {
     case SLIDE_RIGHT: {

@@ -34,13 +34,11 @@ export const setLoadingToFalse = () =>{
 function fetchPosts() {
 
   return async function(dispatch,getState){
-    console.log(getState(),'getstate');
     try {
       dispatch(setLoadingToTrue())
       const url = `https://jsonplaceholder.typicode.com/posts`;
       const response = await fetch(url)
       const responseBody = await response.json();
-      console.log(responseBody,'responseBody');
       dispatch(updateData(responseBody))
       dispatch(setLoadingToFalse())
       

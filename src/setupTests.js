@@ -6,11 +6,6 @@ import '@testing-library/jest-dom';
 
 
 
-// React Library Size :
 
-// Netflix --
-// Hybrid
-
-// On page load -- We are gonna HTML PAGE 
-
-// Subsequenct done thru react 
+// HOC - Higher order Component
+// render props -- 

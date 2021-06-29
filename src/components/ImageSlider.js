@@ -73,7 +73,6 @@ componentDidMount () {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state ,'state');
   return {
     curr: state.slideControl.curr,
     isLoading: state.slideControl.isLoading,
